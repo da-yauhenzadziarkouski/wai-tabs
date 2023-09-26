@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>WAI Tabs</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      /* Demo styles */
+      main {
+        width: calc(100% - 48px);
+        max-width: 1024px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .wrapper {
+        display: grid;
+        grid-template-columns: auto 1fr;
+      }
+      .tablist {
+        width: 96px;
+        position: relative;
+        z-index: 1;
+      }
+      .tab {
+        display: block;
+        cursor: pointer;
+        padding: 4px 8px;
+        border: 1px solid transparent;
+        border-right: 0;
+        background-color: white;
+        background-color: silver;
+        margin-right: -1px;
+        user-select: none;
+      }
+      .tab--active {
+        background-color: white;
+        border-color: gray;
+      }
+      .panel {
+        border: 1px solid gray;
+        grid-row-start: 1;
+        grid-column-start: 2;
+      }
+      .panel__inner {
+        background-color: white;
+        padding: 10px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity ease .7s, visibility .1s;
+      }
+      .panel--active .panel__inner {
+        visibility: visible;
+        opacity: 1;
+      }
+      h2 {
+        margin-top: 0;
+      }
+    </style>
+    <script type="module">
+      import WAITabs from "../src/index.js"
+
+      const toggleClasses = (navItems, panes, index) => {
+        navItems.forEach((navItem, navItemIndex) => {
+          const classListMethod = navItemIndex === index ? "add" : "remove"
+
+          navItem.classList[classListMethod]("tab--active")
+          panes[navItemIndex].classList[classListMethod]("panel--active")
+        })
+      }
+
+      const useInstance = ({ wrapper, navItems, panes, getIndex, selectTab }) => {
+        if (wrapper.classList.contains("wrapper--alt")) {
+          document.querySelectorAll(".btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              let index
+
+              if (btn.dataset.tabIndex) {
+                index = btn.dataset.tabIndex
+              } else {
+                index = getIndex() + 1
+                index = index > navItems.length - 1 ? 0 : index
+              }
+
+              selectTab(index)
+            })
+          })
+        }
+
+        return {
+          onSelect: (index, event) => {
+            toggleClasses(navItems, panes, index)
+            console.log(event)
+          },
+          onTabKeyFocus: (index, event) => {
+            console.log({index, event})
+          }
+        }
+      }
+
+      new WAITabs(".wrapper").mount(useInstance)
+    </script>
+  </head>
+  <body>
+    <main>
+      <h1>WAI Tabs</h1>
+
+      <div class="wrapper">
+        <div class="tablist" role="tablist" aria-orientation="vertical">
+          <div class="tab tab--active" id="tab-1" role="tab" aria-selected="true" tabindex="0" aria-controls="panel-1">Tab 1</div>
+          <div class="tab" id="tab-2" role="tab" aria-selected="false" tabindex="-1" aria-controls="panel-2">Tab 2</div>
+          <div class="tab" id="tab-3" role="tab" aria-selected="false" tabindex="-1" aria-controls="panel-3">Tab 3</div>
+        </div>
+        <div class="panel panel--active" id="panel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1" aria-hidden="false">
+          <div class="panel__inner">
+            <h2>Panel #1</h2>
+            <p>Dave wasn't exactly sure how he had ended up in this predicament. He ran through all the events that had lead to this current situation and it still didn't make sense. He wanted to spend some time to try and make sense of it all, but he had higher priorities at the moment. The first was how to get out of his current situation of being naked in a tree with snow falling all around and no way for him to get down.</p>
+          </div>
+        </div>
+        <div class="panel" id="panel-2" role="tabpanel" tabindex="-1" aria-labelledby="tab-2" aria-hidden="true">
+          <div class="panel__inner">
+            <h2>Panel #2</h2>
+            <p>No matter how hard he tried, he couldn't give her a good explanation about what had happened. It didn't even really make sense to him. All he knew was that he froze at the moment and no matter how hard he tried to react, nothing in his body allowed him to move. It was as if he had instantly become a statue and although he could see what was taking place, he couldn't move to intervene. He knew that wasn't a satisfactory explanation even though it was the truth.</p>
+          </div>
+        </div>
+        <div class="panel" id="panel-3" role="tabpanel" tabindex="-1" aria-labelledby="tab-3" aria-hidden="true">
+          <div class="panel__inner">
+            <h2>Panel #3</h2>
+            <p>Peter always saw the world in black and white. There were two choices for every situation and you had to choose one of them. It was therefore terribly uncomfortable for him to spend time with Ashley. She saw the world in shades of gray with hundreds of choices to choose from in every situation.</p>
+          </div>
+        </div>
+      </div>
+
+      <p>External controls</p>
+
+      <div class="wrapper wrapper--alt">
+        <div class="tablist" role="tablist" aria-orientation="vertical">
+          <div class="tab tab--active" id="tab-1-alt" role="tab" aria-selected="true" tabindex="0" aria-controls="panel-1-alt">Tab 1</div>
+          <div class="tab" id="tab-2-alt" role="tab" aria-selected="false" tabindex="-1" aria-controls="panel-2-alt">Tab 2</div>
+          <div class="tab" id="tab-3-alt" role="tab" aria-selected="false" tabindex="-1" aria-controls="panel-3-alt">Tab 3</div>
+        </div>
+        <div class="panel panel--active" id="panel-1-alt" role="tabpanel" tabindex="0" aria-labelledby="tab-1-alt" aria-hidden="false">
+          <div class="panel__inner">
+            <h2>Panel #1</h2>
+            <p>Dave wasn't exactly sure how he had ended up in this predicament. He ran through all the events that had lead to this current situation and it still didn't make sense. He wanted to spend some time to try and make sense of it all, but he had higher priorities at the moment. The first was how to get out of his current situation of being naked in a tree with snow falling all around and no way for him to get down.</p>
+          </div>
+        </div>
+        <div class="panel" id="panel-2-alt" role="tabpanel" tabindex="-1" aria-labelledby="tab-2-alt" aria-hidden="true">
+          <div class="panel__inner">
+            <h2>Panel #2</h2>
+            <p>No matter how hard he tried, he couldn't give her a good explanation about what had happened. It didn't even really make sense to him. All he knew was that he froze at the moment and no matter how hard he tried to react, nothing in his body allowed him to move. It was as if he had instantly become a statue and although he could see what was taking place, he couldn't move to intervene. He knew that wasn't a satisfactory explanation even though it was the truth.</p>
+          </div>
+        </div>
+        <div class="panel" id="panel-3-alt" role="tabpanel" tabindex="-1" aria-labelledby="tab-3-alt" aria-hidden="true">
+          <div class="panel__inner">
+            <h2>Panel #3</h2>
+            <p>Peter always saw the world in black and white. There were two choices for every situation and you had to choose one of them. It was therefore terribly uncomfortable for him to spend time with Ashley. She saw the world in shades of gray with hundreds of choices to choose from in every situation.</p>
+          </div>
+        </div>
+      </div>
+      
+      <p><button class="btn" data-tab-index="1">Select tab #2</button><button class="btn">Select next tab</button></p>
+
+      <p>Or, check a <a href="/examples/index.html">basic usage example</a>.</p>
+    </main> 
+  </body>
+</html>

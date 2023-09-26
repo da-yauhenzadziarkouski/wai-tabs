@@ -1,0 +1,9 @@
+{
+  "startPath": "/examples/index.html",
+  "server": {
+    "baseDir": "./src",
+    "routes": {
+      "/": "./"
+    }
+  }
+}

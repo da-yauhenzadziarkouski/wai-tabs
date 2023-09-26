@@ -1,0 +1,35 @@
+{
+  "name": "wai-tabs",
+  "version": "0.0.1",
+  "description": "A simple Tabs widget skeleton, build with accessibility in mind - on top of `tabindex`, `aria-*` and `role` attributes.",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "start": "lite-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tabs",
+    "accessibility",
+    "WAI-ARIA",
+    "W3C",
+    "js",
+    "JSDoc"
+  ],
+  "author": {
+    "name": "Yauhen Zadziarkouski",
+    "email": "yauhen.zadziarkouski@darwinapps.com",
+    "url": "https://darwinapps.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/da-yauhenzadziarkouski/wai-tabs.git"
+  },
+  "bugs": "https://github.com/da-yauhenzadziarkouski/wai-tabs/issues",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}

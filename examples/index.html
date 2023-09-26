@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>WAI Tabs</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      /* Core styles */ 
+      [role="tabpanel"][aria-hidden="true"] {
+        display: none;
+      }
+      /* Demo styles */
+      main {
+        width: calc(100% - 48px);
+        max-width: 1024px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      [role="tab"] {
+        cursor: pointer;
+        padding: 4px 8px;
+        border: 1px solid transparent;
+        border-bottom: 0;
+        background-color: white;
+        background-color: silver;
+        user-select: none;
+      }
+      [role="tab"][aria-selected="true"] {
+        background-color: white;
+        border-color: gray;
+      }
+      [role="tablist"] {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 6px;
+      }
+      [role="tabpanel"] {
+        margin-top: -1px;
+        background-color: white;
+        padding: 10px;
+        border: 1px solid gray;
+        max-width: 400px;
+      }
+    </style>
+    <script type="module">
+      import WAITabs from "../src/index.js"
+
+      new WAITabs().mount()
+    </script>
+  </head>
+  <body>
+    <main>
+      <h1>WAI Tabs</h1>
+
+      <div role="tablist" aria-orientation="horizontal">
+        <button id="tab-1" role="tab" aria-selected="true" tabindex="0" aria-controls="panel-1">Tab 1</button>
+        <button id="tab-2" role="tab" aria-selected="false" tabindex="-1" aria-controls="panel-2">Tab 2</button>
+        <button id="tab-3" role="tab" aria-selected="false" tabindex="-1" aria-controls="panel-3">Tab 3</button>
+      </div>
+      <div id="panel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1" aria-hidden="false">
+        Panel #1
+      </div>
+      <div id="panel-2" role="tabpanel" tabindex="-1" aria-labelledby="tab-2" aria-hidden="true">
+        Panel #2
+      </div>
+      <div id="panel-3" role="tabpanel" tabindex="-1" aria-labelledby="tab-3" aria-hidden="true">
+        Panel #3
+      </div>
+
+      <p>An example with the second tab selected by default</p>
+
+      <div role="tablist" aria-orientation="horizontal">
+        <button id="tab-1-alt" role="tab" aria-selected="false" tabindex="-1" aria-controls="panel-1-alt">Tab 1</button>
+        <button id="tab-2-alt" role="tab" aria-selected="true" tabindex="0" aria-controls="panel-2-alt">Tab 2</button>
+        <button id="tab-3-alt" role="tab" aria-selected="false" tabindex="-1" aria-controls="panel-3-alt">Tab 3</button>
+      </div>
+      <div id="panel-1-alt" role="tabpanel" tabindex="-1" aria-labelledby="tab-1-alt" aria-hidden="true">
+        Panel #1
+      </div>
+      <div id="panel-2-alt" role="tabpanel" tabindex="0" aria-labelledby="tab-2-alt" aria-hidden="false">
+        Panel #2
+      </div>
+      <div id="panel-3-alt" role="tabpanel" tabindex="-1" aria-labelledby="tab-3-alt" aria-hidden="true">
+        Panel #3
+      </div>
+
+      <p>Or, check an <a href="/examples/advanced.html">advanced usage example</a>.</p>
+    </main> 
+  </body>
+</html>

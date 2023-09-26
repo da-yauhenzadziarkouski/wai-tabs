@@ -78,7 +78,9 @@
                 index = btn.dataset.tabIndex
               } else {
                 index = getIndex() + 1
-                index = index > navItems.length - 1 ? 0 : index
+                if (index > navItems.length - 1) {
+                  index = 0
+                }
               }
 
               selectTab(index)

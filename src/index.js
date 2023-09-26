@@ -292,7 +292,7 @@ const getLayout = (el, defaultLayout = "horizontal") => {
 
 
 /**
- * A simple Tabs widget skeleton, build with accessibility in mind
+ * A simple Tabs widget skeleton, built with accessibility in mind
  * - on top of 'tabindex', 'aria-*' and 'role' attributes
  *
  * @class

@@ -1,6 +1,6 @@
 # WAI Tabs &#9971;
 
-A simple Tabs widget skeleton, build with accessibility in mind - on top of `tabindex`, `aria-*` and `role` attributes. It's a bare minimum, but lets you construct a fully functional module in minutes with little to no efforts at the same time, if the correct CSS styles were provided.
+A simple Tabs widget skeleton, built with accessibility in mind - on top of `tabindex`, `aria-*` and `role` attributes. It's a bare minimum, but lets you construct a fully functional module in minutes with little to no effort at the same time, if the correct CSS styles were provided.
 
 ## Why
 
@@ -8,11 +8,11 @@ A simple Tabs widget skeleton, build with accessibility in mind - on top of `tab
 2. This plugin lets you ensure that you didn't forget to add all required attributes to follow [WAI-ARIA Tabs Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/).
 3. Ability to use any HTML tags as controls besides `<button>`.
 4. You can use as many wrappers as you need for the navigation items or panels - this will not affect the behavior.
-5. Tab panels can be in a different order than tabs - this doesn't matter since the script queries the panels by the `id` attribute.
+5. Tab panels can be added in a different order than tabs - it doesn't matter since the script queries the panels by the `id` attribute.
 
 ## How it works
 
-Basically, it changes certain attributes, but also provides a simple API for extending: it doesn't add any classes or change attributes except `tabindex`, `aria-selected` and `aria-hidden`, so you need to pass a custom function/hook to the `mount` method, if you would like to change the HTML DOM dynamically - please see [Configuration](#configuration). You may ask "Why the script doesn't add `hidden` attribute to panels? Well, because sometimes we don't need to entirely hide the panels, but to toggle CSS visibility property instead to keep the widget height constant, relying on the tallest pane, and use CSS transitions.
+Basically, it changes certain attributes, but also provides a simple API for extending: it doesn't add any classes or change other attributes except `tabindex`, `aria-selected` and `aria-hidden`, so you need to pass a custom function/hook to the `mount` method if you want to change the HTML DOM dynamically - please see [Configuration](#configuration). You may ask: "Why the script doesn't add `hidden` attribute to panels?" Well, because sometimes we don't need to entirely hide the panels, but toggle the CSS visibility property instead to keep the widget height constant, relying on the tallest pane, and using CSS transitions.
 
 It utilizes the following HTML Attributes:
 
@@ -77,11 +77,11 @@ And Tabs HTML:
 
 **Advanced usage**
 
-Since we might need to have more control over the look and behavior by using our own classes or change the HTML DOM dynamically, the code may looks like the following:
+Since we might need to have more control over the look and behavior by using custom classes or change the HTML DOM dynamically, the code may look like the following:
 
 ```js
 /**
- * The function invoked per a separate instance initialization and
+ * This function invokes per a separate instance initialization and
  * may optionally return an object with two optional properties
  * - callbacks "onSelect" and "onTabKeyFocus"
  */
@@ -94,15 +94,15 @@ const useInstance = (singleInstance) => {
     selectTab // a function/method - programmatically select a desired tab by calling it with a certain index as an argument
   } = singleInstance;
 
-  // Adding custom data attribute just as example
+  // Adding custom data attribute just as an example
   const initialIndex = getIndex();
   panes[initialIndex].dataset.currentPane = "true";
 
   return {
     /**
-     * Fires when a tab was selected on "click" or "keydown"
-     * event or after invoking "selectTab" method (event as a
-     * second argument will be undefined). 
+     * Fires when a tab is selected on the "click" or "keydown"
+     * event or after invoking the "selectTab" method (event as
+     * a second argument will be undefined).
      */
     onSelect: (index, event) {
       console.log(event.type === "click" ? `Clicked the tab #${index + 1}` : `Pressed the tab #${index + 1}`)
@@ -116,8 +116,8 @@ const useInstance = (singleInstance) => {
       })
     },
     /**
-     * Fires when focused on a tab, but only if used
-     * keyboard keys such as arrows, Home, End
+     * Fires when focused on a tab, but only if keyboard
+     * keys such as arrows, Home, End were used
      */
     onTabKeyFocus(index, event) {
       console.log(`The tab #${index + 1} is in focus!`, event.type);

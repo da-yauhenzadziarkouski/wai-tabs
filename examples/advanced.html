@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
       /* Demo styles */
+      body {
+        font-family: sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #f7f7f7;
+      }
       main {
         width: calc(100% - 48px);
         max-width: 1024px;
@@ -14,10 +20,9 @@
       }
       .wrapper {
         display: grid;
-        grid-template-columns: auto 1fr;
+        grid-template-columns: 96px 1fr;
       }
       .tablist {
-        width: 96px;
         position: relative;
         z-index: 1;
       }
@@ -29,31 +34,37 @@
         border-right: 0;
         background-color: white;
         background-color: silver;
-        margin-right: -1px;
         user-select: none;
       }
       .tab--active {
         background-color: white;
         border-color: gray;
+        margin-right: -1px;
       }
       .panel {
         border: 1px solid gray;
         grid-row-start: 1;
         grid-column-start: 2;
+        padding: 16px 16px 24px;
+        visibility: hidden;
+        transition: visibility .1s;
+        background-color: white;
       }
       .panel__inner {
-        background-color: white;
-        padding: 10px;
         opacity: 0;
-        visibility: hidden;
-        transition: opacity ease .7s, visibility .1s;
+        transition: opacity ease .7s;
+      }
+      .panel--active {
+        visibility: visible;
       }
       .panel--active .panel__inner {
-        visibility: visible;
         opacity: 1;
       }
       h2 {
         margin-top: 0;
+      }
+      .panel__inner > *:last-child {
+        margin-bottom: 0;
       }
     </style>
     <script type="module">
@@ -104,7 +115,7 @@
   </head>
   <body>
     <main>
-      <h1>WAI Tabs</h1>
+      <h1>WAI Tabs &#9971;</h1>
 
       <div class="wrapper">
         <div class="tablist" role="tablist" aria-orientation="vertical">

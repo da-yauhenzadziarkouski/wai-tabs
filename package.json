@@ -1,14 +1,16 @@
 {
   "name": "wai-tabs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple Tabs widget skeleton, built with accessibility in mind - on top of `tabindex`, `aria-*` and `role` attributes.",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
   "main": "src/index.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "start": "lite-server",
+    "ts": "npx tsc --allowJs --declaration --outDir types/ --emitDeclarationOnly src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -16,7 +18,7 @@
     "accessibility",
     "WAI-ARIA",
     "W3C",
-    "js",
+    "JavaScript",
     "JSDoc"
   ],
   "author": {
@@ -29,7 +31,7 @@
     "url": "git://github.com/da-yauhenzadziarkouski/wai-tabs.git"
   },
   "bugs": "https://github.com/da-yauhenzadziarkouski/wai-tabs/issues",
-  "dependencies": {
+  "devDependencies": {
     "lite-server": "^2.6.1"
   }
 }

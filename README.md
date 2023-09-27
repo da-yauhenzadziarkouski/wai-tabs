@@ -5,14 +5,14 @@ A simple Tabs widget skeleton, built with accessibility in mind - on top of `tab
 ## Why
 
 1. There are tons of similar plugins available, but usually we don't need an extra functionality or dive into a setup complexity, these offer.
-2. This plugin lets you ensure that you didn't forget to add all required attributes to follow [WAI-ARIA Tabs Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/).
+2. This plugin lets you ensure that you didn't forget to add all required attributes to match [WAI-ARIA Tabs Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/).
 3. Ability to use any HTML tags as controls besides `<button>`.
 4. You can use as many wrappers as you need for the navigation items or panels - this will not affect the behavior.
 5. Tab panels can be added in a different order than tabs - it doesn't matter since the script queries the panels by the `id` attribute.
 
 ## How it works
 
-Basically, it changes certain attributes, but also provides a simple API for extending: it doesn't add any classes or change other attributes except `tabindex`, `aria-selected` and `aria-hidden`, so you need to pass a custom function/hook to the `mount` method if you want to change the HTML DOM dynamically - please see [Configuration](#configuration). You may ask: "Why the script doesn't add `hidden` attribute to panels?" Well, because sometimes we don't need to entirely hide the panels, but toggle the CSS visibility property instead to keep the widget height constant, relying on the tallest pane, and using CSS transitions.
+Basically, it changes certain attributes, but also provides a simple API for extending: it doesn't add any classes, modify styles or change other attributes except `tabindex`, `aria-selected` and `aria-hidden`, so you need to pass a custom function/hook to the `mount` method if you want to change the HTML DOM dynamically - please see [Configuration](#configuration). You may ask: "Why the script doesn't add `hidden` attribute to panels?" Well, because sometimes we don't need to entirely hide the panels, but toggle the CSS visibility property instead to keep the widget height constant, relying on the tallest pane, and using CSS transitions.
 
 It utilizes the following HTML Attributes:
 
@@ -20,9 +20,9 @@ It utilizes the following HTML Attributes:
 - `role="tab"` is used as a selector to query all navigation items.
 - `aria-orientation` (`"horizontal"`/`"vertical"`) attribute is for internal handling the key codes correctly while using keyboard. It's optional, if your tabs list is horizontal.
 - `tabindex` (`"0"`/`"-1"`) to make elements focusable or restrict focus instead.
-- `aria-selected` (`"true"`/`"false"`) see https://w3c.github.io/aria/#aria-selected Additionally, `aria-selected="true"` determines an initial index that's utilized internally while using arrow keys to focus on a certain tab.
+- `aria-selected` (`"true"`/`"false"`) see https://w3c.github.io/aria/#aria-selected Additionally, `aria-selected="true"` determines an initial index that's utilized internally while using arrow keys to focus on a tab.
 - `aria-controls` tab attribute along with the tab panel `id` to query all associated pane elements.
-- `aria-hidden` is used to mark the pane as hidden for screen readers.
+- `aria-hidden` is used to mark the pane as hidden to screen readers.
 
 So, you should add attributes stated above to let the widget work. The script itself doesn't assert custom error messages to keep it lightweight.
 
@@ -44,7 +44,7 @@ new WAITabs().mount()
 
 The script takes care about all instances on the page, querying elements by `'[role="tablist"]'` selector by default.
 
-A minimum CSS may looks like this:
+A minimal CSS might look like this:
 
 ```css
 [role="tab"][aria-selected="true"] {
@@ -77,7 +77,7 @@ And Tabs HTML:
 
 **Advanced usage**
 
-Since we might need to have more control over the look and behavior by using custom classes or change the HTML DOM dynamically, the code may look like the following:
+Since we might need to have more control over the look and behavior by using custom classes or change the HTML DOM dynamically, the code might look like this:
 
 ```js
 /**
@@ -91,7 +91,7 @@ const useInstance = (singleInstance) => {
     navItems, // an array of [role="tab"] elements
     panes,    // an array of associated [role="tabpanel"] elements
     getIndex, // a function/method - get an internal active tab's index
-    selectTab // a function/method - programmatically select a desired tab by calling it with a certain index as an argument
+    selectTab // a function/method - programmatically select a desired tab, passing a certain index as an argument
   } = singleInstance;
 
   // Adding custom data attribute just as an example
@@ -104,15 +104,15 @@ const useInstance = (singleInstance) => {
      * event or after invoking the "selectTab" method (event as
      * a second argument will be undefined).
      */
-    onSelect: (index, event) {
-      console.log(event.type === "click" ? `Clicked the tab #${index + 1}` : `Pressed the tab #${index + 1}`)
+    onSelect: (index, event) => {
+      console.log(event.type === "click" ? `Clicked the tab #${index + 1}` : `Pressed the tab #${index + 1}`);
 
       navItems.forEach((navItem, i) => {
         // I personally use Tailwind, so I need to add/remove a certain class
-        navItem.classList[i === index ? "add" : "remove"]("text-blue-400", "border-b-blue-400")
+        navItem.classList[i === index ? "add" : "remove"]("text-blue-400", "border-b-blue-400");
 
         // Change pane's "data-current-pane" attribute
-        panes[i].dataset.currentPane = (i === index).toString()
+        panes[i].dataset.currentPane = (i === index).toString();
       })
     },
     /**

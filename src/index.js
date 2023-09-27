@@ -296,7 +296,7 @@ const getLayout = (el, defaultLayout = "horizontal") => {
  * - on top of 'tabindex', 'aria-*' and 'role' attributes
  *
  * @class
- * @version  0.0.2
+ * @version  0.0.4
  * @author   Yauhen Zadziarkouski - https://github.com/da-yauhenzadziarkouski
  * @license  MIT
  */

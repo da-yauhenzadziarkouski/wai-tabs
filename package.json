@@ -1,6 +1,6 @@
 {
   "name": "wai-tabs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A simple Tabs widget skeleton, built with accessibility in mind - on top of `tabindex`, `aria-*` and `role` attributes.",
   "license": "MIT",
   "publishConfig": {
@@ -16,10 +16,10 @@
   "keywords": [
     "tabs",
     "accessibility",
-    "WAI-ARIA",
-    "W3C",
-    "JavaScript",
-    "JSDoc"
+    "wai-aria",
+    "w3c",
+    "javascript",
+    "jsdoc"
   ],
   "author": {
     "name": "Yauhen Zadziarkouski",
